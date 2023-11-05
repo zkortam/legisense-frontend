@@ -2,6 +2,10 @@
 
 Welcome to the LegiSense frontend project! This project is part of the LabLabAI hackathon and complements the LegiSense backend. LegiSense is a powerful tool designed to provide users with easy access to legislative information and a customized AI chat interface for tracking and analyzing legislation. This document will guide you through the setup and usage of the LegiSense frontend.
 
+### LegiSense - Backend can be found here:
+[LegiSense Backend](http://github.com/mrdiamonddirt/legisense-backend)
+
+
 ## Features
 
 - **Legislative Data**: Access legislative data from various sources through the Vectara API. Stay up-to-date with the latest bills, laws, and regulations.
