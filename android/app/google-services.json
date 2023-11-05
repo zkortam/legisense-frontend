@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "255140374343",
+    "project_id": "legisenseappofficial",
+    "storage_bucket": "legisenseappofficial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255140374343:android:47d32f406ad073a329ce62",
+        "android_client_info": {
+          "package_name": "com.legisense.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtlc3_3Qb81ehFlTk4hyd4O6dLr0KZpjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
