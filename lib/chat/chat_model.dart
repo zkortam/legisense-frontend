@@ -12,9 +12,13 @@ class ChatModel extends FlutterFlowModel<ChatWidget> {
 
   String defaultINfo = '0';
 
+  bool submitted = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (Send Full Prompt)] action in chat widget.
+  ApiCallResponse? chatGPTResponseCopy118554;
   // State field(s) for Column widget.
   ScrollController? columnController;
   // Stores action output result for [Backend Call - API (Send Full Prompt)] action in Container widget.

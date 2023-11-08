@@ -15,3 +15,4 @@ export '/notifications/notifications_widget.dart' show NotificationsWidget;
 export '/user_interface/user_interface_widget.dart' show UserInterfaceWidget;
 export '/search/search_widget.dart' show SearchWidget;
 export '/single_law/single_law_widget.dart' show SingleLawWidget;
+export '/test/test_widget.dart' show TestWidget;

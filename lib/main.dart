@@ -97,11 +97,21 @@ class _MyAppState extends State<MyApp> {
       ],
       theme: ThemeData(
         brightness: Brightness.light,
-        scrollbarTheme: const ScrollbarThemeData(),
+        scrollbarTheme: ScrollbarThemeData(
+          thumbVisibility: MaterialStateProperty.all(false),
+          trackVisibility: MaterialStateProperty.all(false),
+          interactive: true,
+          thickness: MaterialStateProperty.all(2.0),
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        scrollbarTheme: const ScrollbarThemeData(),
+        scrollbarTheme: ScrollbarThemeData(
+          thumbVisibility: MaterialStateProperty.all(false),
+          trackVisibility: MaterialStateProperty.all(false),
+          interactive: true,
+          thickness: MaterialStateProperty.all(2.0),
+        ),
       ),
       themeMode: _themeMode,
       routerConfig: _router,

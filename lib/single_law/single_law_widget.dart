@@ -8,7 +8,14 @@ import 'single_law_model.dart';
 export 'single_law_model.dart';
 
 class SingleLawWidget extends StatefulWidget {
-  const SingleLawWidget({super.key});
+  const SingleLawWidget({
+    super.key,
+    this.law,
+    this.name,
+  });
+
+  final dynamic law;
+  final String? name;
 
   @override
   _SingleLawWidgetState createState() => _SingleLawWidgetState();
@@ -302,9 +309,9 @@ class _SingleLawWidgetState extends State<SingleLawWidget> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                '4qxp5a6r' /* Law Name */,
+                                              valueOrDefault<String>(
+                                                widget.name,
+                                                'Law Name',
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -573,10 +580,11 @@ class _SingleLawWidgetState extends State<SingleLawWidget> {
                                                                         .start,
                                                                 children: [
                                                                   Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'hc89gip7' /* Summarizing the law. */,
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      widget.law
+                                                                          ?.toString(),
+                                                                      'kkooo',
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -705,7 +713,7 @@ class _SingleLawWidgetState extends State<SingleLawWidget> {
                                                             FFLocalizations.of(
                                                                     context)
                                                                 .getText(
-                                                              'o65si70m' /* 11 */,
+                                                              'nxj08n0p' /* 11 */,
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)

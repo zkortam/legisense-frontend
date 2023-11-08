@@ -177,7 +177,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           requireAuth: true,
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'singleLaw')
-              : const SingleLawWidget(),
+              : SingleLawWidget(
+                  law: params.getParam('law', ParamType.JSON),
+                  name: params.getParam('name', ParamType.String),
+                ),
+        ),
+        FFRoute(
+          name: 'test',
+          path: '/test',
+          builder: (context, params) => const TestWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

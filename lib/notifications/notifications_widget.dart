@@ -504,9 +504,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                           letterSpacing: 0.3,
                                                         ),
                                               ),
-                                              activeColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                              activeColor: const Color(0xFF4B39EF),
                                               activeTrackColor:
                                                   const Color(0x8A4B39EF),
                                               dense: false,
