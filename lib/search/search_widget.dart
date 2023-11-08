@@ -375,7 +375,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                         FFLocalizations.of(
                                                                 context)
                                                             .getText(
-                                                          'ewx2rk9m' /* Law Search */,
+                                                          'nvue5g7y' /* Law Search */,
                                                         ),
                                                         style: FlutterFlowTheme
                                                                 .of(context)
@@ -428,7 +428,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             hintText:
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                              '2558h8bj' /* Search */,
+                                              'mod0vqnu' /* Search */,
                                             ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)

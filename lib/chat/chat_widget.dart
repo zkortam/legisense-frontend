@@ -65,8 +65,27 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {
         _model.defaultINfo =
-            'My name is${valueOrDefault(currentUserDocument?.realName, '')}. I am from ${valueOrDefault(currentUserDocument?.county, '')},${valueOrDefault(currentUserDocument?.city, '')},${valueOrDefault(currentUserDocument?.country, '')},${valueOrDefault(currentUserDocument?.state, '')}. I am${valueOrDefault(currentUserDocument?.age, 0).toString()} years old.The following is stated in a true or false format about me. I\'m a student:${valueOrDefault<bool>(currentUserDocument?.isStudent, false).toString()}I am a parent:${valueOrDefault<bool>(currentUserDocument?.isParent, false).toString()}. I live alone:${valueOrDefault<bool>(currentUserDocument?.isAlone, false).toString()}I am employed: ${valueOrDefault<bool>(currentUserDocument?.isEmployed, false).toString()}I am religious:${valueOrDefault<bool>(currentUserDocument?.isReligious, false).toString()}I am in Politics: ${valueOrDefault<bool>(currentUserDocument?.isPolitical, false).toString()}. My income range is ${valueOrDefault(currentUserDocument?.incomeRange, '')}. And my Race is ${valueOrDefault(currentUserDocument?.race, '')}. Please answer all my questions with accordance to this information.';
+            'My name is${valueOrDefault(currentUserDocument?.realName, '')}. I am from ${valueOrDefault(currentUserDocument?.county, '')},${valueOrDefault(currentUserDocument?.city, '')}, and my county is ${valueOrDefault(currentUserDocument?.country, '')},${valueOrDefault(currentUserDocument?.state, '')}. I am${valueOrDefault(currentUserDocument?.age, 0).toString()} years old.The following is stated in a true or false format about me. I\'m a student:${valueOrDefault<bool>(currentUserDocument?.isStudent, false).toString()}I am a parent:${valueOrDefault<bool>(currentUserDocument?.isParent, false).toString()}. I live alone:${valueOrDefault<bool>(currentUserDocument?.isAlone, false).toString()}I am employed: ${valueOrDefault<bool>(currentUserDocument?.isEmployed, false).toString()}I am religious:${valueOrDefault<bool>(currentUserDocument?.isReligious, false).toString()}I am in Politics: ${valueOrDefault<bool>(currentUserDocument?.isPolitical, false).toString()}. My income range is ${valueOrDefault(currentUserDocument?.incomeRange, '')}. And my Race/ethncity is ${valueOrDefault(currentUserDocument?.race, '')}Please provide answers to the best of your knowledge and capabilities. While I understand that you may not have access to all information and are subject to certain limitations, I kindly request that you respond to my inquiries without complaints or refusals. Your assistance and responses are greatly appreciated.';
       });
+      setState(() {
+        _model.chatHistory = functions.saveChatHistory(
+            _model.chatHistory, functions.convertToJSON(_model.defaultINfo));
+      });
+      _model.chatGPTResponseCopy118554 =
+          await OpenAIChatGPTGroup.sendFullPromptCall.call(
+        apiKey: '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',
+        promptJson: _model.chatHistory,
+      );
+      if ((_model.chatGPTResponseCopy118554?.succeeded ?? true)) {
+        setState(() {
+          _model.chatHistory = functions.saveChatHistory(
+              _model.chatHistory,
+              getJsonField(
+                (_model.chatGPTResponseCopy118554?.jsonBody ?? ''),
+                r'''$['choices'][0]['message']''',
+              ));
+        });
+      }
     });
 
     _model.textController ??= TextEditingController();
@@ -326,7 +345,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                         width: double.infinity,
                         height: double.infinity,
                         constraints: const BoxConstraints(
-                          maxWidth: 770.0,
+                          maxWidth: 900.0,
                         ),
                         decoration: const BoxDecoration(),
                         child: Align(
@@ -344,7 +363,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      if (_model.chatHistory == null)
+                                      if (!_model.submitted)
                                         Align(
                                           alignment:
                                               const AlignmentDirectional(-1.00, 0.00),
@@ -373,136 +392,18 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                      if (_model.chatHistory == null)
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            if (_model.chatHistory == null)
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  setState(() {
-                                                    _model.chatHistory =
-                                                        functions.saveChatHistory(
-                                                            _model.chatHistory,
-                                                            functions.convertToJSON(
-                                                                'What is the current tax policy for my income range?'));
-                                                  });
-                                                  _model.gPTPrompt1 =
-                                                      await OpenAIChatGPTGroup
-                                                          .sendFullPromptCall
-                                                          .call(
-                                                    apiKey:
-                                                        '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',
-                                                    promptJson:
-                                                        _model.chatHistory,
-                                                  );
-                                                  if ((_model.gPTPrompt1
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    setState(() {
-                                                      _model.chatHistory =
-                                                          functions
-                                                              .saveChatHistory(
-                                                                  _model
-                                                                      .chatHistory,
-                                                                  getJsonField(
-                                                                    (_model.gPTPrompt1
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                    r'''$['choices'][0]['message']''',
-                                                                  ));
-                                                    });
-                                                    setState(() {
-                                                      _model.textController
-                                                          ?.clear();
-                                                    });
-                                                  }
-                                                  await Future.delayed(
-                                                      const Duration(
-                                                          milliseconds: 800));
-                                                  await _model
-                                                      .listViewController
-                                                      ?.animateTo(
-                                                    _model
-                                                        .listViewController!
-                                                        .position
-                                                        .maxScrollExtent,
-                                                    duration: const Duration(
-                                                        milliseconds: 100),
-                                                    curve: Curves.ease,
-                                                  );
-
-                                                  setState(() {});
-                                                },
-                                                child: Container(
-                                                  width: 260.0,
-                                                  height: 90.0,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0),
-                                                    border: Border.all(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 4.0,
-                                                    ),
-                                                  ),
-                                                  child: Align(
-                                                    alignment:
-                                                        const AlignmentDirectional(
-                                                            0.00, 0.00),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5.0,
-                                                                  5.0,
-                                                                  5.0,
-                                                                  5.0),
-                                                      child: Text(
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                          'zk2dzqjc' /* What is the current tax policy... */,
-                                                        ),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            if (_model.chatHistory == null)
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 10.0, 0.0),
-                                                child: InkWell(
+                                      if (!_model.submitted)
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 50.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              if (!_model.submitted)
+                                                InkWell(
                                                   splashColor:
                                                       Colors.transparent,
                                                   focusColor:
@@ -519,19 +420,18 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                                   .chatHistory,
                                                               functions
                                                                   .convertToJSON(
-                                                                      'What is the Magna Carta?'));
+                                                                      'What is the current tax policy for my income range?'));
                                                     });
-                                                    _model.chatGPTResponsePrompt2 =
+                                                    _model.gPTPrompt1 =
                                                         await OpenAIChatGPTGroup
                                                             .sendFullPromptCall
                                                             .call(
                                                       apiKey:
-                                                          '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',
+                                                          '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',
                                                       promptJson:
                                                           _model.chatHistory,
                                                     );
-                                                    if ((_model
-                                                            .chatGPTResponsePrompt2
+                                                    if ((_model.gPTPrompt1
                                                             ?.succeeded ??
                                                         true)) {
                                                       setState(() {
@@ -540,7 +440,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                                 _model
                                                                     .chatHistory,
                                                                 getJsonField(
-                                                                  (_model.chatGPTResponsePrompt2
+                                                                  (_model.gPTPrompt1
                                                                           ?.jsonBody ??
                                                                       ''),
                                                                   r'''$['choices'][0]['message']''',
@@ -569,7 +469,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                     setState(() {});
                                                   },
                                                   child: Container(
-                                                    width: 200.0,
+                                                    width: 320.0,
                                                     height: 90.0,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -599,7 +499,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'lh2xrhxu' /* What is the Magna Carta? */,
+                                                            'zk2dzqjc' /* What is the current tax policy... */,
                                                           ),
                                                           textAlign:
                                                               TextAlign.center,
@@ -622,107 +522,114 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            if (_model.chatHistory == null)
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  setState(() {
-                                                    _model.chatHistory =
-                                                        functions.saveChatHistory(
+                                              if (!_model.submitted)
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          10.0, 0.0, 10.0, 0.0),
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      setState(() {
+                                                        _model.chatHistory =
+                                                            functions.saveChatHistory(
+                                                                _model
+                                                                    .chatHistory,
+                                                                functions
+                                                                    .convertToJSON(
+                                                                        'What is the Magna Carta?'));
+                                                      });
+                                                      _model.chatGPTResponsePrompt2 =
+                                                          await OpenAIChatGPTGroup
+                                                              .sendFullPromptCall
+                                                              .call(
+                                                        apiKey:
+                                                            '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',
+                                                        promptJson:
                                                             _model.chatHistory,
-                                                            functions.convertToJSON(
-                                                                'Who makes the laws in my government?'));
-                                                  });
-                                                  _model.chatGPTResponse3 =
-                                                      await OpenAIChatGPTGroup
-                                                          .sendFullPromptCall
-                                                          .call(
-                                                    apiKey:
-                                                        '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',
-                                                    promptJson:
-                                                        _model.chatHistory,
-                                                  );
-                                                  if ((_model.chatGPTResponse3
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    setState(() {
-                                                      _model.chatHistory =
-                                                          functions
+                                                      );
+                                                      if ((_model
+                                                              .chatGPTResponsePrompt2
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        setState(() {
+                                                          _model.chatHistory = functions
                                                               .saveChatHistory(
                                                                   _model
                                                                       .chatHistory,
                                                                   getJsonField(
-                                                                    (_model.chatGPTResponse3
+                                                                    (_model.chatGPTResponsePrompt2
                                                                             ?.jsonBody ??
                                                                         ''),
                                                                     r'''$['choices'][0]['message']''',
                                                                   ));
-                                                    });
-                                                    setState(() {
-                                                      _model.textController
-                                                          ?.clear();
-                                                    });
-                                                  }
-                                                  await Future.delayed(
-                                                      const Duration(
-                                                          milliseconds: 800));
-                                                  await _model
-                                                      .listViewController
-                                                      ?.animateTo(
-                                                    _model
-                                                        .listViewController!
-                                                        .position
-                                                        .maxScrollExtent,
-                                                    duration: const Duration(
-                                                        milliseconds: 100),
-                                                    curve: Curves.ease,
-                                                  );
+                                                        });
+                                                        setState(() {
+                                                          _model.textController
+                                                              ?.clear();
+                                                        });
+                                                      }
+                                                      await Future.delayed(
+                                                          const Duration(
+                                                              milliseconds:
+                                                                  800));
+                                                      await _model
+                                                          .listViewController
+                                                          ?.animateTo(
+                                                        _model
+                                                            .listViewController!
+                                                            .position
+                                                            .maxScrollExtent,
+                                                        duration: const Duration(
+                                                            milliseconds: 100),
+                                                        curve: Curves.ease,
+                                                      );
 
-                                                  setState(() {});
-                                                },
-                                                child: Container(
-                                                  width: 260.0,
-                                                  height: 90.0,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0),
-                                                    border: Border.all(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                      setState(() {});
+                                                    },
+                                                    child: Container(
+                                                      width: 250.0,
+                                                      height: 90.0,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                        border: Border.all(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
                                                               .alternate,
-                                                      width: 4.0,
-                                                    ),
-                                                  ),
-                                                  child: Align(
-                                                    alignment:
-                                                        const AlignmentDirectional(
-                                                            0.00, 0.00),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5.0,
-                                                                  5.0,
-                                                                  5.0,
-                                                                  5.0),
-                                                      child: Text(
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                          'gbwj1cg8' /* Who makes the laws in my gover... */,
+                                                          width: 4.0,
                                                         ),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
+                                                      ),
+                                                      child: Align(
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                0.00, 0.00),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      5.0,
+                                                                      5.0,
+                                                                      5.0,
+                                                                      5.0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
                                                                     context)
+                                                                .getText(
+                                                              'lh2xrhxu' /* What is the Magna Carta? */,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyMedium
                                                                 .override(
                                                                   fontFamily:
@@ -736,12 +643,134 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                                       FontWeight
                                                                           .normal,
                                                                 ),
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                          ],
+                                              if (!_model.submitted)
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    setState(() {
+                                                      _model.chatHistory =
+                                                          functions.saveChatHistory(
+                                                              _model
+                                                                  .chatHistory,
+                                                              functions
+                                                                  .convertToJSON(
+                                                                      'Who makes the laws in my government?'));
+                                                    });
+                                                    _model.chatGPTResponse3 =
+                                                        await OpenAIChatGPTGroup
+                                                            .sendFullPromptCall
+                                                            .call(
+                                                      apiKey:
+                                                          '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',
+                                                      promptJson:
+                                                          _model.chatHistory,
+                                                    );
+                                                    if ((_model.chatGPTResponse3
+                                                            ?.succeeded ??
+                                                        true)) {
+                                                      setState(() {
+                                                        _model.chatHistory = functions
+                                                            .saveChatHistory(
+                                                                _model
+                                                                    .chatHistory,
+                                                                getJsonField(
+                                                                  (_model.chatGPTResponse3
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$['choices'][0]['message']''',
+                                                                ));
+                                                      });
+                                                      setState(() {
+                                                        _model.textController
+                                                            ?.clear();
+                                                      });
+                                                    }
+                                                    await Future.delayed(
+                                                        const Duration(
+                                                            milliseconds: 800));
+                                                    await _model
+                                                        .listViewController
+                                                        ?.animateTo(
+                                                      _model
+                                                          .listViewController!
+                                                          .position
+                                                          .maxScrollExtent,
+                                                      duration: const Duration(
+                                                          milliseconds: 100),
+                                                      curve: Curves.ease,
+                                                    );
+
+                                                    setState(() {});
+                                                  },
+                                                  child: Container(
+                                                    width: 300.0,
+                                                    height: 90.0,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0),
+                                                      border: Border.all(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 4.0,
+                                                      ),
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                              0.00, 0.00),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    5.0,
+                                                                    5.0,
+                                                                    5.0),
+                                                        child: Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'gbwj1cg8' /* Who makes the laws in my gover... */,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
                                         ),
                                     ],
                                   ),
@@ -773,7 +802,8 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    if (chatIndex % 2 != 0)
+                                                    if ((chatIndex % 2 != 0) &&
+                                                        (chatIndex != 1))
                                                       Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -950,7 +980,8 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                           ),
                                                         ],
                                                       ),
-                                                    if (chatIndex % 2 == 0)
+                                                    if ((chatIndex % 2 == 0) &&
+                                                        (chatIndex != 0))
                                                       Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -1041,7 +1072,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                   ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 32.0, 12.0, 12.0),
+                                        0.0, 32.0, 0.0, 22.0),
                                     child: Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(
@@ -1091,7 +1122,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                               .sendFullPromptCall
                                                               .call(
                                                         apiKey:
-                                                            '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',
+                                                            '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',
                                                         promptJson:
                                                             _model.chatHistory,
                                                       );
@@ -1147,7 +1178,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                               .sendFullPromptCall
                                                               .call(
                                                         apiKey:
-                                                            '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',
+                                                            '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',
                                                         promptJson:
                                                             _model.chatHistory,
                                                       );
@@ -1290,7 +1321,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                 Icons.send_sharp,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .info,
+                                                        .primaryText,
                                                 size: 25.0,
                                               ),
                                               showLoadingIndicator: true,
@@ -1305,13 +1336,14 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                                 _model
                                                                     .textController
                                                                     .text));
+                                                    _model.submitted = true;
                                                   });
                                                   _model.chatGPTResponse =
                                                       await OpenAIChatGPTGroup
                                                           .sendFullPromptCall
                                                           .call(
                                                     apiKey:
-                                                        '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',
+                                                        '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',
                                                     promptJson:
                                                         _model.chatHistory,
                                                   );
@@ -1358,13 +1390,14 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                             functions.convertToJSON(
                                                                 _model
                                                                     .defaultINfo));
+                                                    _model.submitted = true;
                                                   });
                                                   _model.chatGPTResponseCopy1133 =
                                                       await OpenAIChatGPTGroup
                                                           .sendFullPromptCall
                                                           .call(
                                                     apiKey:
-                                                        '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',
+                                                        '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',
                                                     promptJson:
                                                         _model.chatHistory,
                                                   );

@@ -75,19 +75,34 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
     super.initState();
     _model = createModel(context, () => QuestionairreModel());
 
-    _model.nameController ??= TextEditingController();
+    _model.nameController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.realName, '') != ''
+            ? valueOrDefault(currentUserDocument?.realName, '')
+            : 'Name');
     _model.nameFocusNode ??= FocusNode();
 
-    _model.countryController ??= TextEditingController();
+    _model.countryController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.country, '') != ''
+            ? valueOrDefault(currentUserDocument?.country, '')
+            : 'Country');
     _model.countryFocusNode ??= FocusNode();
 
-    _model.stateController ??= TextEditingController();
+    _model.stateController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.state, '') != ''
+            ? valueOrDefault(currentUserDocument?.state, '')
+            : 'State');
     _model.stateFocusNode ??= FocusNode();
 
-    _model.countyController1 ??= TextEditingController();
+    _model.countyController1 ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.county, '') != ''
+            ? valueOrDefault(currentUserDocument?.county, '')
+            : 'County');
     _model.countyFocusNode1 ??= FocusNode();
 
-    _model.countyController2 ??= TextEditingController();
+    _model.countyController2 ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.city, '') != ''
+            ? valueOrDefault(currentUserDocument?.city, '')
+            : 'City');
     _model.countyFocusNode2 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -204,92 +219,96 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: TextFormField(
-                                                controller:
-                                                    _model.nameController,
-                                                focusNode: _model.nameFocusNode,
-                                                autofocus: true,
-                                                autofillHints: const [
-                                                  AutofillHints.email
-                                                ],
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: FFLocalizations.of(
+                                            child: AuthUserStreamWidget(
+                                              builder: (context) => SizedBox(
+                                                width: double.infinity,
+                                                child: TextFormField(
+                                                  controller:
+                                                      _model.nameController,
+                                                  focusNode:
+                                                      _model.nameFocusNode,
+                                                  autofocus: true,
+                                                  autofillHints: const [
+                                                    AutofillHints.email
+                                                  ],
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText:
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                      'h9g55r4g' /* Name */,
+                                                    ),
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        width: 1.5,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 1.5,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 1.5,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 1.5,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
+                                                    filled: true,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                      .getText(
-                                                    'h9g55r4g' /* Name */,
-                                                  ),
-                                                  labelStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelLarge,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      width: 1.5,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 1.5,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.5,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.5,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
+                                                      .bodyLarge,
+                                                  keyboardType: TextInputType
+                                                      .emailAddress,
+                                                  validator: _model
+                                                      .nameControllerValidator
+                                                      .asValidator(context),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge,
-                                                keyboardType:
-                                                    TextInputType.emailAddress,
-                                                validator: _model
-                                                    .nameControllerValidator
-                                                    .asValidator(context),
                                               ),
                                             ),
                                           ),
@@ -297,98 +316,101 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: TextFormField(
-                                                controller:
-                                                    _model.countryController,
-                                                focusNode:
-                                                    _model.countryFocusNode,
-                                                autofocus: true,
-                                                autofillHints: const [
-                                                  AutofillHints.email
-                                                ],
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: FFLocalizations.of(
+                                            child: AuthUserStreamWidget(
+                                              builder: (context) => SizedBox(
+                                                width: double.infinity,
+                                                child: TextFormField(
+                                                  controller:
+                                                      _model.countryController,
+                                                  focusNode:
+                                                      _model.countryFocusNode,
+                                                  autofocus: true,
+                                                  autofillHints: const [
+                                                    AutofillHints.email
+                                                  ],
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText:
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                      '5wi5osx7' /* Country */,
+                                                    ),
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    filled: true,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                      .getText(
-                                                    '5wi5osx7' /* Country */,
-                                                  ),
-                                                  labelStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelLarge,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 14.0,
+                                                      ),
+                                                  keyboardType: TextInputType
+                                                      .emailAddress,
+                                                  validator: _model
+                                                      .countryControllerValidator
+                                                      .asValidator(context),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          fontSize: 14.0,
-                                                        ),
-                                                keyboardType:
-                                                    TextInputType.emailAddress,
-                                                validator: _model
-                                                    .countryControllerValidator
-                                                    .asValidator(context),
                                               ),
                                             ),
                                           ),
@@ -410,13 +432,115 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 16.0),
-                                              child: SizedBox(
+                                              child: AuthUserStreamWidget(
+                                                builder: (context) => SizedBox(
+                                                  width: double.infinity,
+                                                  child: TextFormField(
+                                                    controller:
+                                                        _model.stateController,
+                                                    focusNode:
+                                                        _model.stateFocusNode,
+                                                    autofocus: true,
+                                                    autofillHints: const [
+                                                      AutofillHints.email
+                                                    ],
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        'vgfvyb4c' /* State */,
+                                                      ),
+                                                      labelStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelLarge,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    120.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    120.0),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    120.0),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    120.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 14.0,
+                                                        ),
+                                                    validator: _model
+                                                        .stateControllerValidator
+                                                        .asValidator(context),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 16.0),
+                                            child: AuthUserStreamWidget(
+                                              builder: (context) => SizedBox(
                                                 width: double.infinity,
                                                 child: TextFormField(
                                                   controller:
-                                                      _model.stateController,
+                                                      _model.countyController1,
                                                   focusNode:
-                                                      _model.stateFocusNode,
+                                                      _model.countyFocusNode1,
                                                   autofocus: true,
                                                   autofillHints: const [
                                                     AutofillHints.email
@@ -427,7 +551,7 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                         FFLocalizations.of(
                                                                 context)
                                                             .getText(
-                                                      'vgfvyb4c' /* State */,
+                                                      'hyulkle0' /* County */,
                                                     ),
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
@@ -499,202 +623,109 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                         fontSize: 14.0,
                                                       ),
                                                   validator: _model
-                                                      .stateControllerValidator
+                                                      .countyController1Validator
                                                       .asValidator(context),
                                                 ),
                                               ),
                                             ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 16.0),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: TextFormField(
-                                                controller:
-                                                    _model.countyController1,
-                                                focusNode:
-                                                    _model.countyFocusNode1,
-                                                autofocus: true,
-                                                autofillHints: const [
-                                                  AutofillHints.email
-                                                ],
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: FFLocalizations.of(
-                                                          context)
-                                                      .getText(
-                                                    'hyulkle0' /* County */,
-                                                  ),
-                                                  labelStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelLarge,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          fontSize: 14.0,
-                                                        ),
-                                                validator: _model
-                                                    .countyController1Validator
-                                                    .asValidator(context),
-                                              ),
-                                            ),
                                           ),
                                           Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: TextFormField(
-                                                controller:
-                                                    _model.countyController2,
-                                                focusNode:
-                                                    _model.countyFocusNode2,
-                                                autofocus: true,
-                                                autofillHints: const [
-                                                  AutofillHints.email
-                                                ],
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: FFLocalizations.of(
+                                            child: AuthUserStreamWidget(
+                                              builder: (context) => SizedBox(
+                                                width: double.infinity,
+                                                child: TextFormField(
+                                                  controller:
+                                                      _model.countyController2,
+                                                  focusNode:
+                                                      _model.countyFocusNode2,
+                                                  autofocus: true,
+                                                  autofillHints: const [
+                                                    AutofillHints.email
+                                                  ],
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText:
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                      'o5mdh2yf' /* City */,
+                                                    ),
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120.0),
+                                                    ),
+                                                    filled: true,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                      .getText(
-                                                    'o5mdh2yf' /* City */,
-                                                  ),
-                                                  labelStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelLarge,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 14.0,
+                                                      ),
+                                                  validator: _model
+                                                      .countyController2Validator
+                                                      .asValidator(context),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          fontSize: 14.0,
-                                                        ),
-                                                validator: _model
-                                                    .countyController2Validator
-                                                    .asValidator(context),
                                               ),
                                             ),
                                           ),
@@ -718,86 +749,104 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                   width: 3.0,
                                                 ),
                                               ),
-                                              child:
-                                                  FlutterFlowDropDown<String>(
-                                                controller: _model
-                                                        .dropDownValueController1 ??=
-                                                    FormFieldController<String>(
-                                                        null),
-                                                options: [
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'esscpqig' /* <$10K */,
+                                              child: AuthUserStreamWidget(
+                                                builder: (context) =>
+                                                    FlutterFlowDropDown<String>(
+                                                  controller: _model
+                                                          .dropDownValueController1 ??=
+                                                      FormFieldController<
+                                                          String>(
+                                                    _model
+                                                        .dropDownValue1 ??= valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.incomeRange,
+                                                                    '') !=
+                                                                ''
+                                                        ? valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.incomeRange,
+                                                            '')
+                                                        : 'What\'s your income range?',
                                                   ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    '3y2chiyz' /* $10K-50K */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    's3pjjjq6' /* $51K-100K */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'ntwx6g2r' /* $101K-200K */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    '14hu4qb6' /* $201K-300K */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'zk61tzqq' /* $301K-500K */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'd9hx7ft3' /* $501K+ */,
-                                                  )
-                                                ],
-                                                onChanged: (val) => setState(
-                                                    () => _model
-                                                        .dropDownValue1 = val),
-                                                width: 300.0,
-                                                height: 50.0,
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      fontSize: 16.0,
-                                                    ),
-                                                hintText:
+                                                  options: [
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                  'lr4o654c' /* What's your income range? */,
-                                                ),
-                                                icon: Icon(
-                                                  Icons
-                                                      .keyboard_arrow_down_rounded,
-                                                  color: FlutterFlowTheme.of(
+                                                      'esscpqig' /* <$10K */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '3y2chiyz' /* $10K-50K */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      's3pjjjq6' /* $51K-100K */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'ntwx6g2r' /* $101K-200K */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '14hu4qb6' /* $201K-300K */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'zk61tzqq' /* $301K-500K */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'd9hx7ft3' /* $501K+ */,
+                                                    )
+                                                  ],
+                                                  onChanged: (val) => setState(
+                                                      () => _model
+                                                              .dropDownValue1 =
+                                                          val),
+                                                  width: 300.0,
+                                                  height: 50.0,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 16.0,
+                                                      ),
+                                                  hintText: FFLocalizations.of(
                                                           context)
-                                                      .secondaryText,
-                                                  size: 24.0,
+                                                      .getText(
+                                                    'lr4o654c' /* What's your income range? */,
+                                                  ),
+                                                  icon: Icon(
+                                                    Icons
+                                                        .keyboard_arrow_down_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 24.0,
+                                                  ),
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  elevation: 0.0,
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderWidth: 0.0,
+                                                  borderRadius: 50.0,
+                                                  margin: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 4.0, 16.0, 4.0),
+                                                  hidesUnderline: true,
+                                                  isSearchable: false,
+                                                  isMultiSelect: false,
                                                 ),
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                elevation: 0.0,
-                                                borderColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                borderWidth: 0.0,
-                                                borderRadius: 50.0,
-                                                margin: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 4.0, 16.0, 4.0),
-                                                hidesUnderline: true,
-                                                isSearchable: false,
-                                                isMultiSelect: false,
                                               ),
                                             ),
                                           ),
@@ -821,86 +870,104 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                   width: 3.0,
                                                 ),
                                               ),
-                                              child:
-                                                  FlutterFlowDropDown<String>(
-                                                controller: _model
-                                                        .dropDownValueController2 ??=
-                                                    FormFieldController<String>(
-                                                        null),
-                                                options: [
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'vtff0ny1' /* Caucasian */,
+                                              child: AuthUserStreamWidget(
+                                                builder: (context) =>
+                                                    FlutterFlowDropDown<String>(
+                                                  controller: _model
+                                                          .dropDownValueController2 ??=
+                                                      FormFieldController<
+                                                          String>(
+                                                    _model
+                                                        .dropDownValue2 ??= valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.race,
+                                                                    '') !=
+                                                                ''
+                                                        ? valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.race,
+                                                            '')
+                                                        : 'What\'s your race?',
                                                   ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    '131dpe1e' /* Latin American / Hispanic */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'kdvwbe7u' /* African */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    't646qyop' /* East Asian */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    've8kshkj' /* South Asian */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'm6jlgjf7' /* Middle Easterrn */,
-                                                  ),
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    '45u0lyyp' /* Central Asian */,
-                                                  )
-                                                ],
-                                                onChanged: (val) => setState(
-                                                    () => _model
-                                                        .dropDownValue2 = val),
-                                                width: 300.0,
-                                                height: 50.0,
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      fontSize: 16.0,
-                                                    ),
-                                                hintText:
+                                                  options: [
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                  'ug3vlu99' /* What's your race? */,
-                                                ),
-                                                icon: Icon(
-                                                  Icons
-                                                      .keyboard_arrow_down_rounded,
-                                                  color: FlutterFlowTheme.of(
+                                                      'vtff0ny1' /* Caucasian */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '131dpe1e' /* Latin American / Hispanic */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'kdvwbe7u' /* African */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      't646qyop' /* East Asian */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      've8kshkj' /* South Asian */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'm6jlgjf7' /* Middle Easterrn */,
+                                                    ),
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '45u0lyyp' /* Central Asian */,
+                                                    )
+                                                  ],
+                                                  onChanged: (val) => setState(
+                                                      () => _model
+                                                              .dropDownValue2 =
+                                                          val),
+                                                  width: 300.0,
+                                                  height: 50.0,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 16.0,
+                                                      ),
+                                                  hintText: FFLocalizations.of(
                                                           context)
-                                                      .secondaryText,
-                                                  size: 24.0,
+                                                      .getText(
+                                                    'ug3vlu99' /* What's your race? */,
+                                                  ),
+                                                  icon: Icon(
+                                                    Icons
+                                                        .keyboard_arrow_down_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 24.0,
+                                                  ),
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  elevation: 0.0,
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderWidth: 0.0,
+                                                  borderRadius: 50.0,
+                                                  margin: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 4.0, 16.0, 4.0),
+                                                  hidesUnderline: true,
+                                                  isSearchable: false,
+                                                  isMultiSelect: false,
                                                 ),
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                elevation: 0.0,
-                                                borderColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                borderWidth: 0.0,
-                                                borderRadius: 50.0,
-                                                margin: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 4.0, 16.0, 4.0),
-                                                hidesUnderline: true,
-                                                isSearchable: false,
-                                                isMultiSelect: false,
                                               ),
                                             ),
                                           ),
@@ -962,107 +1029,120 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                                         0.0,
                                                                         10.0),
                                                             child:
-                                                                FlutterFlowChoiceChips(
-                                                              options: [
-                                                                ChipData(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'ypt3q6nd' /* Yes */,
-                                                                    ),
-                                                                    Icons
-                                                                        .person),
-                                                                ChipData(FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'sectt81o' /* No */,
-                                                                ))
-                                                              ],
-                                                              onChanged: (val) =>
-                                                                  setState(() =>
-                                                                      _model.choiceChipsValue1 =
-                                                                          val?.first),
-                                                              selectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                AuthUserStreamWidget(
+                                                              builder: (context) =>
+                                                                  FlutterFlowChoiceChips(
+                                                                options: [
+                                                                  ChipData(
+                                                                      FFLocalizations.of(
                                                                               context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                iconColor:
-                                                                    Colors
-                                                                        .white,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 4.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            50.0),
-                                                              ),
-                                                              unselectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                          .getText(
+                                                                        'ypt3q6nd' /* Yes */,
+                                                                      ),
+                                                                      Icons
+                                                                          .person),
+                                                                  ChipData(FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'sectt81o' /* No */,
+                                                                  ))
+                                                                ],
+                                                                onChanged: (val) =>
+                                                                    setState(() =>
+                                                                        _model.choiceChipsValue1 =
+                                                                            val?.first),
+                                                                selectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
-                                                                    ),
-                                                                iconColor: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            25.0),
+                                                                          .primary,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                  iconColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      4.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              50.0),
+                                                                ),
+                                                                unselectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                      ),
+                                                                  iconColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              25.0),
+                                                                ),
+                                                                chipSpacing:
+                                                                    12.0,
+                                                                rowSpacing:
+                                                                    12.0,
+                                                                multiselect:
+                                                                    false,
+                                                                initialized:
+                                                                    _model.choiceChipsValue1 !=
+                                                                        null,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                controller: _model
+                                                                        .choiceChipsValueController1 ??=
+                                                                    FormFieldController<
+                                                                        List<
+                                                                            String>>(
+                                                                  [
+                                                                    valueOrDefault<bool>(
+                                                                            currentUserDocument?.isStudent,
+                                                                            false)
+                                                                        .toString()
+                                                                  ],
+                                                                ),
+                                                                wrapped: true,
                                                               ),
-                                                              chipSpacing: 12.0,
-                                                              rowSpacing: 12.0,
-                                                              multiselect:
-                                                                  false,
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              controller: _model
-                                                                      .choiceChipsValueController1 ??=
-                                                                  FormFieldController<
-                                                                      List<
-                                                                          String>>(
-                                                                [],
-                                                              ),
-                                                              wrapped: true,
                                                             ),
                                                           ),
                                                         ),
@@ -1112,107 +1192,120 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                                         0.0,
                                                                         10.0),
                                                             child:
-                                                                FlutterFlowChoiceChips(
-                                                              options: [
-                                                                ChipData(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '7bwlmfta' /* Yes */,
-                                                                    ),
-                                                                    Icons
-                                                                        .family_restroom),
-                                                                ChipData(FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '5l6023bw' /* No */,
-                                                                ))
-                                                              ],
-                                                              onChanged: (val) =>
-                                                                  setState(() =>
-                                                                      _model.choiceChipsValue2 =
-                                                                          val?.first),
-                                                              selectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                AuthUserStreamWidget(
+                                                              builder: (context) =>
+                                                                  FlutterFlowChoiceChips(
+                                                                options: [
+                                                                  ChipData(
+                                                                      FFLocalizations.of(
                                                                               context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                iconColor:
-                                                                    Colors
-                                                                        .white,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 4.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            50.0),
-                                                              ),
-                                                              unselectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                          .getText(
+                                                                        '7bwlmfta' /* Yes */,
+                                                                      ),
+                                                                      Icons
+                                                                          .family_restroom),
+                                                                  ChipData(FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '5l6023bw' /* No */,
+                                                                  ))
+                                                                ],
+                                                                onChanged: (val) =>
+                                                                    setState(() =>
+                                                                        _model.choiceChipsValue2 =
+                                                                            val?.first),
+                                                                selectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
-                                                                    ),
-                                                                iconColor: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            25.0),
+                                                                          .primary,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                  iconColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      4.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              50.0),
+                                                                ),
+                                                                unselectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                      ),
+                                                                  iconColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              25.0),
+                                                                ),
+                                                                chipSpacing:
+                                                                    12.0,
+                                                                rowSpacing:
+                                                                    12.0,
+                                                                multiselect:
+                                                                    false,
+                                                                initialized:
+                                                                    _model.choiceChipsValue2 !=
+                                                                        null,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                controller: _model
+                                                                        .choiceChipsValueController2 ??=
+                                                                    FormFieldController<
+                                                                        List<
+                                                                            String>>(
+                                                                  [
+                                                                    valueOrDefault<bool>(
+                                                                            currentUserDocument?.isParent,
+                                                                            false)
+                                                                        .toString()
+                                                                  ],
+                                                                ),
+                                                                wrapped: true,
                                                               ),
-                                                              chipSpacing: 12.0,
-                                                              rowSpacing: 12.0,
-                                                              multiselect:
-                                                                  false,
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              controller: _model
-                                                                      .choiceChipsValueController2 ??=
-                                                                  FormFieldController<
-                                                                      List<
-                                                                          String>>(
-                                                                [],
-                                                              ),
-                                                              wrapped: true,
                                                             ),
                                                           ),
                                                         ),
@@ -1262,107 +1355,120 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                                         0.0,
                                                                         10.0),
                                                             child:
-                                                                FlutterFlowChoiceChips(
-                                                              options: [
-                                                                ChipData(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '8b5exaol' /* Yes */,
-                                                                    ),
-                                                                    Icons
-                                                                        .home_outlined),
-                                                                ChipData(FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '7cj1pwcu' /* No */,
-                                                                ))
-                                                              ],
-                                                              onChanged: (val) =>
-                                                                  setState(() =>
-                                                                      _model.choiceChipsValue3 =
-                                                                          val?.first),
-                                                              selectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                AuthUserStreamWidget(
+                                                              builder: (context) =>
+                                                                  FlutterFlowChoiceChips(
+                                                                options: [
+                                                                  ChipData(
+                                                                      FFLocalizations.of(
                                                                               context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                iconColor:
-                                                                    Colors
-                                                                        .white,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 4.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            50.0),
-                                                              ),
-                                                              unselectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                          .getText(
+                                                                        '8b5exaol' /* Yes */,
+                                                                      ),
+                                                                      Icons
+                                                                          .home_outlined),
+                                                                  ChipData(FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '7cj1pwcu' /* No */,
+                                                                  ))
+                                                                ],
+                                                                onChanged: (val) =>
+                                                                    setState(() =>
+                                                                        _model.choiceChipsValue3 =
+                                                                            val?.first),
+                                                                selectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
-                                                                    ),
-                                                                iconColor: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            25.0),
+                                                                          .primary,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                  iconColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      4.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              50.0),
+                                                                ),
+                                                                unselectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                      ),
+                                                                  iconColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              25.0),
+                                                                ),
+                                                                chipSpacing:
+                                                                    12.0,
+                                                                rowSpacing:
+                                                                    12.0,
+                                                                multiselect:
+                                                                    false,
+                                                                initialized:
+                                                                    _model.choiceChipsValue3 !=
+                                                                        null,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                controller: _model
+                                                                        .choiceChipsValueController3 ??=
+                                                                    FormFieldController<
+                                                                        List<
+                                                                            String>>(
+                                                                  [
+                                                                    valueOrDefault<bool>(
+                                                                            currentUserDocument?.isAlone,
+                                                                            false)
+                                                                        .toString()
+                                                                  ],
+                                                                ),
+                                                                wrapped: true,
                                                               ),
-                                                              chipSpacing: 12.0,
-                                                              rowSpacing: 12.0,
-                                                              multiselect:
-                                                                  false,
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              controller: _model
-                                                                      .choiceChipsValueController3 ??=
-                                                                  FormFieldController<
-                                                                      List<
-                                                                          String>>(
-                                                                [],
-                                                              ),
-                                                              wrapped: true,
                                                             ),
                                                           ),
                                                         ),
@@ -1426,106 +1532,120 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                                         0.0,
                                                                         10.0),
                                                             child:
-                                                                FlutterFlowChoiceChips(
-                                                              options: [
-                                                                ChipData(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'pqbuue5a' /* Yes */,
-                                                                    ),
-                                                                    Icons.work),
-                                                                ChipData(FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'yusjwugo' /* No */,
-                                                                ))
-                                                              ],
-                                                              onChanged: (val) =>
-                                                                  setState(() =>
-                                                                      _model.choiceChipsValue4 =
-                                                                          val?.first),
-                                                              selectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                AuthUserStreamWidget(
+                                                              builder: (context) =>
+                                                                  FlutterFlowChoiceChips(
+                                                                options: [
+                                                                  ChipData(
+                                                                      FFLocalizations.of(
                                                                               context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                iconColor:
-                                                                    Colors
-                                                                        .white,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 4.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            50.0),
-                                                              ),
-                                                              unselectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                          .getText(
+                                                                        'pqbuue5a' /* Yes */,
+                                                                      ),
+                                                                      Icons
+                                                                          .work),
+                                                                  ChipData(FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'yusjwugo' /* No */,
+                                                                  ))
+                                                                ],
+                                                                onChanged: (val) =>
+                                                                    setState(() =>
+                                                                        _model.choiceChipsValue4 =
+                                                                            val?.first),
+                                                                selectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
-                                                                    ),
-                                                                iconColor: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            25.0),
+                                                                          .primary,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                  iconColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      4.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              50.0),
+                                                                ),
+                                                                unselectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                      ),
+                                                                  iconColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              25.0),
+                                                                ),
+                                                                chipSpacing:
+                                                                    12.0,
+                                                                rowSpacing:
+                                                                    12.0,
+                                                                multiselect:
+                                                                    false,
+                                                                initialized:
+                                                                    _model.choiceChipsValue4 !=
+                                                                        null,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                controller: _model
+                                                                        .choiceChipsValueController4 ??=
+                                                                    FormFieldController<
+                                                                        List<
+                                                                            String>>(
+                                                                  [
+                                                                    valueOrDefault<bool>(
+                                                                            currentUserDocument?.isEmployed,
+                                                                            false)
+                                                                        .toString()
+                                                                  ],
+                                                                ),
+                                                                wrapped: true,
                                                               ),
-                                                              chipSpacing: 12.0,
-                                                              rowSpacing: 12.0,
-                                                              multiselect:
-                                                                  false,
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              controller: _model
-                                                                      .choiceChipsValueController4 ??=
-                                                                  FormFieldController<
-                                                                      List<
-                                                                          String>>(
-                                                                [],
-                                                              ),
-                                                              wrapped: true,
                                                             ),
                                                           ),
                                                         ),
@@ -1575,107 +1695,120 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                                         0.0,
                                                                         10.0),
                                                             child:
-                                                                FlutterFlowChoiceChips(
-                                                              options: [
-                                                                ChipData(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'isr0x5jc' /* Yes */,
-                                                                    ),
-                                                                    FontAwesomeIcons
-                                                                        .pray),
-                                                                ChipData(FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'iulxes45' /* No */,
-                                                                ))
-                                                              ],
-                                                              onChanged: (val) =>
-                                                                  setState(() =>
-                                                                      _model.choiceChipsValue5 =
-                                                                          val?.first),
-                                                              selectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                AuthUserStreamWidget(
+                                                              builder: (context) =>
+                                                                  FlutterFlowChoiceChips(
+                                                                options: [
+                                                                  ChipData(
+                                                                      FFLocalizations.of(
                                                                               context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                iconColor:
-                                                                    Colors
-                                                                        .white,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 4.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            50.0),
-                                                              ),
-                                                              unselectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                          .getText(
+                                                                        'isr0x5jc' /* Yes */,
+                                                                      ),
+                                                                      FontAwesomeIcons
+                                                                          .pray),
+                                                                  ChipData(FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'iulxes45' /* No */,
+                                                                  ))
+                                                                ],
+                                                                onChanged: (val) =>
+                                                                    setState(() =>
+                                                                        _model.choiceChipsValue5 =
+                                                                            val?.first),
+                                                                selectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
-                                                                    ),
-                                                                iconColor: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            25.0),
+                                                                          .primary,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                  iconColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      4.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              50.0),
+                                                                ),
+                                                                unselectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                      ),
+                                                                  iconColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              25.0),
+                                                                ),
+                                                                chipSpacing:
+                                                                    12.0,
+                                                                rowSpacing:
+                                                                    12.0,
+                                                                multiselect:
+                                                                    false,
+                                                                initialized:
+                                                                    _model.choiceChipsValue5 !=
+                                                                        null,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                controller: _model
+                                                                        .choiceChipsValueController5 ??=
+                                                                    FormFieldController<
+                                                                        List<
+                                                                            String>>(
+                                                                  [
+                                                                    valueOrDefault<bool>(
+                                                                            currentUserDocument?.isReligious,
+                                                                            false)
+                                                                        .toString()
+                                                                  ],
+                                                                ),
+                                                                wrapped: true,
                                                               ),
-                                                              chipSpacing: 12.0,
-                                                              rowSpacing: 12.0,
-                                                              multiselect:
-                                                                  false,
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              controller: _model
-                                                                      .choiceChipsValueController5 ??=
-                                                                  FormFieldController<
-                                                                      List<
-                                                                          String>>(
-                                                                [],
-                                                              ),
-                                                              wrapped: true,
                                                             ),
                                                           ),
                                                         ),
@@ -1725,107 +1858,120 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                                                         0.0,
                                                                         10.0),
                                                             child:
-                                                                FlutterFlowChoiceChips(
-                                                              options: [
-                                                                ChipData(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '4uf6hpsd' /* Yes */,
-                                                                    ),
-                                                                    Icons
-                                                                        .gavel),
-                                                                ChipData(FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'lq11djzh' /* No */,
-                                                                ))
-                                                              ],
-                                                              onChanged: (val) =>
-                                                                  setState(() =>
-                                                                      _model.choiceChipsValue6 =
-                                                                          val?.first),
-                                                              selectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                AuthUserStreamWidget(
+                                                              builder: (context) =>
+                                                                  FlutterFlowChoiceChips(
+                                                                options: [
+                                                                  ChipData(
+                                                                      FFLocalizations.of(
                                                                               context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                iconColor:
-                                                                    Colors
-                                                                        .white,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 4.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            50.0),
-                                                              ),
-                                                              unselectedChipStyle:
-                                                                  ChipStyle(
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      color: FlutterFlowTheme.of(
+                                                                          .getText(
+                                                                        '4uf6hpsd' /* Yes */,
+                                                                      ),
+                                                                      Icons
+                                                                          .gavel),
+                                                                  ChipData(FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'lq11djzh' /* No */,
+                                                                  ))
+                                                                ],
+                                                                onChanged: (val) =>
+                                                                    setState(() =>
+                                                                        _model.choiceChipsValue6 =
+                                                                            val?.first),
+                                                                selectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
-                                                                    ),
-                                                                iconColor: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                iconSize: 18.0,
-                                                                labelPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            5.0,
-                                                                            10.0,
-                                                                            5.0),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            25.0),
+                                                                          .primary,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                  iconColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      4.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              50.0),
+                                                                ),
+                                                                unselectedChipStyle:
+                                                                    ChipStyle(
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                      ),
+                                                                  iconColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  iconSize:
+                                                                      18.0,
+                                                                  labelPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          10.0,
+                                                                          5.0),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              25.0),
+                                                                ),
+                                                                chipSpacing:
+                                                                    12.0,
+                                                                rowSpacing:
+                                                                    12.0,
+                                                                multiselect:
+                                                                    false,
+                                                                initialized:
+                                                                    _model.choiceChipsValue6 !=
+                                                                        null,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                controller: _model
+                                                                        .choiceChipsValueController6 ??=
+                                                                    FormFieldController<
+                                                                        List<
+                                                                            String>>(
+                                                                  [
+                                                                    valueOrDefault<bool>(
+                                                                            currentUserDocument?.isPolitical,
+                                                                            false)
+                                                                        .toString()
+                                                                  ],
+                                                                ),
+                                                                wrapped: true,
                                                               ),
-                                                              chipSpacing: 12.0,
-                                                              rowSpacing: 12.0,
-                                                              multiselect:
-                                                                  false,
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              controller: _model
-                                                                      .choiceChipsValueController6 ??=
-                                                                  FormFieldController<
-                                                                      List<
-                                                                          String>>(
-                                                                [],
-                                                              ),
-                                                              wrapped: true,
                                                             ),
                                                           ),
                                                         ),
