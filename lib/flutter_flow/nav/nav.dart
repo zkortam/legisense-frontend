@@ -180,6 +180,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : SingleLawWidget(
                   law: params.getParam('law', ParamType.JSON),
                   name: params.getParam('name', ParamType.String),
+                  summary: params.getParam('summary', ParamType.String),
+                  index: params.getParam('index', ParamType.int),
                 ),
         ),
         FFRoute(

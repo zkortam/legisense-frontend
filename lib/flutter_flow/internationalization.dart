@@ -122,7 +122,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'nl': '',
       'ru': '',
     },
-    'u89420og': {
+    'pzumsm4i': {
       'en': 'View',
       'de': '',
       'es': '',
@@ -131,7 +131,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'nl': '',
       'ru': '',
     },
-    '0bdics0m': {
+    '8mhntunc': {
       'en': 'No. of Laws',
       'de': '',
       'es': '',
@@ -601,7 +601,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // questionairre
   {
     'kcl1803e': {
-      'en': 'Questionairre',
+      'en': 'Questionaire',
       'de': '',
       'es': '',
       'fr': '',
@@ -1285,7 +1285,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ru': '',
     },
     'nxj08n0p': {
-      'en': '11',
+      'en': '0',
       'de': '',
       'es': '',
       'fr': '',

@@ -194,7 +194,7 @@ class _QuestionairreWidgetState extends State<QuestionairreWidget>
                                         children: [
                                           Text(
                                             FFLocalizations.of(context).getText(
-                                              'kcl1803e' /* Questionairre */,
+                                              'kcl1803e' /* Questionaire */,
                                             ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)

@@ -14,6 +14,8 @@ class ChatModel extends FlutterFlowModel<ChatWidget> {
 
   bool submitted = false;
 
+  String apikey = '000';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
