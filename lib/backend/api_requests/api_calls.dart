@@ -134,6 +134,44 @@ class QueryCorpusCall {
       );
 }
 
+class AnyScaleLlamaCall {
+  static Future<ApiCallResponse> call({
+    String? systemMessage =
+        'You are a Assistant Called LegiSense, You have another system called Legidex that has access to the past 101 years of general uk legislation, if there is something you don\'t know you can refer to our Search function that has indexed the previous 101 years of relevant general uk legislation from the years 1922 - 2023 which is the current year,if you think the query would be best answered by a system with a better knowledge of UK legislation you should refer to that as the LegiDex',
+    String? userMessage =
+        'I need help with my legal matter it todo with data in schools',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "model": "meta-llama/Llama-2-70b-chat-hf",
+  "messages": [
+    {
+      "role": "system",
+      "content": "$systemMessage"
+    },
+    {
+      "role": "user",
+      "content": "$userMessage"
+    }
+  ],
+  "temperature": 0.7
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'AnyScale Llama',
+      apiUrl: 'https://legisense-backend.onrender.com/chat/completions',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

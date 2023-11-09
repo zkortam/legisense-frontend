@@ -533,6 +533,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                                   lawsItem,
                                                                                   ParamType.String,
                                                                                 ),
+                                                                                'summary': serializeParam(
+                                                                                  QueryCorpusCall.summary(
+                                                                                    columnForMuhammadQueryCorpusResponse.jsonBody,
+                                                                                  ).toString(),
+                                                                                  ParamType.String,
+                                                                                ),
+                                                                                'index': serializeParam(
+                                                                                  lawsIndex,
+                                                                                  ParamType.int,
+                                                                                ),
                                                                               }.withoutNulls,
                                                                               extra: <String, dynamic>{
                                                                                 kTransitionInfoKey: const TransitionInfo(
@@ -544,7 +554,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                           },
                                                                           text:
                                                                               FFLocalizations.of(context).getText(
-                                                                            'u89420og' /* View */,
+                                                                            'pzumsm4i' /* View */,
                                                                           ),
                                                                           options:
                                                                               FFButtonOptions(
@@ -657,7 +667,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                        '0bdics0m' /* No. of Laws */,
+                                                        '8mhntunc' /* No. of Laws */,
                                                       ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(

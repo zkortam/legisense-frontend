@@ -73,7 +73,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
       });
       _model.chatGPTResponseCopy118554 =
           await OpenAIChatGPTGroup.sendFullPromptCall.call(
-        apiKey: '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',
+        apiKey: _model.apikey,
         promptJson: _model.chatHistory,
       );
       if ((_model.chatGPTResponseCopy118554?.succeeded ?? true)) {
@@ -426,8 +426,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                         await OpenAIChatGPTGroup
                                                             .sendFullPromptCall
                                                             .call(
-                                                      apiKey:
-                                                          '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',
+                                                      apiKey: _model.apikey,
                                                       promptJson:
                                                           _model.chatHistory,
                                                     );
@@ -550,8 +549,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                           await OpenAIChatGPTGroup
                                                               .sendFullPromptCall
                                                               .call(
-                                                        apiKey:
-                                                            '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',
+                                                        apiKey: _model.apikey,
                                                         promptJson:
                                                             _model.chatHistory,
                                                       );
@@ -673,8 +671,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                         await OpenAIChatGPTGroup
                                                             .sendFullPromptCall
                                                             .call(
-                                                      apiKey:
-                                                          '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',
+                                                      apiKey: _model.apikey,
                                                       promptJson:
                                                           _model.chatHistory,
                                                     );
@@ -1121,8 +1118,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                           await OpenAIChatGPTGroup
                                                               .sendFullPromptCall
                                                               .call(
-                                                        apiKey:
-                                                            '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',
+                                                        apiKey: _model.apikey,
                                                         promptJson:
                                                             _model.chatHistory,
                                                       );
@@ -1177,8 +1173,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                           await OpenAIChatGPTGroup
                                                               .sendFullPromptCall
                                                               .call(
-                                                        apiKey:
-                                                            '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',
+                                                        apiKey: _model.apikey,
                                                         promptJson:
                                                             _model.chatHistory,
                                                       );
@@ -1342,10 +1337,9 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                       await OpenAIChatGPTGroup
                                                           .sendFullPromptCall
                                                           .call(
-                                                    apiKey:
-                                                        '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',
                                                     promptJson:
                                                         _model.chatHistory,
+                                                    apiKey: _model.apikey,
                                                   );
                                                   if ((_model.chatGPTResponse
                                                           ?.succeeded ??
@@ -1396,8 +1390,7 @@ class _ChatWidgetState extends State<ChatWidget> with TickerProviderStateMixin {
                                                       await OpenAIChatGPTGroup
                                                           .sendFullPromptCall
                                                           .call(
-                                                    apiKey:
-                                                        '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',
+                                                    apiKey: _model.apikey,
                                                     promptJson:
                                                         _model.chatHistory,
                                                   );
